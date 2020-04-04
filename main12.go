@@ -2,10 +2,9 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"log"
 	"os"
-	"regexp"
-	"strconv"
 )
 
 func main12() {
@@ -15,26 +14,46 @@ func main12() {
 	}
 	defer f.Close()
 
-	total := 0
+	total := 0.0
 
 	s := bufio.NewScanner(f)
 	for s.Scan() {
-		total += getNumbersTotal12(s.Text())
+		total += getNumbersTotalJSON12(s.Text())
 	}
 
-	log.Printf("Total: %d\n", total)
+	log.Printf("Total: %.0f\n", total)
 }
 
-func getNumbersTotal12(input string) int {
-	result := 0
-	re := regexp.MustCompile(`[-\d]+`)
-	numbers := re.FindAll([]byte(input), -1)
-	for _, numberString := range numbers {
-		numberValue, err := strconv.Atoi(string(numberString))
-		if err != nil {
-			log.Fatalf("Unable to parse %s - %v", numberString, err)
-		}
-		result += numberValue
+func getNumbersTotalJSON12(input string) float64 {
+	var f interface{}
+	err := json.Unmarshal([]byte(input), &f)
+	if err != nil {
+		log.Fatalf("Unable to parse %s - %v", input, err)
 	}
-	return result
+
+	return processElement12(f)
+}
+
+func processElement12(element interface{}) float64 {
+	switch m := element.(type) {
+	case []interface{}:
+		total := 0.0
+		for _, v := range m {
+			total += processElement12(v)
+		}
+		return total
+	case map[string]interface{}:
+		total := 0.0
+		for _, v := range m {
+			if v == "red" {
+				return 0
+			}
+			total += processElement12(v)
+		}
+		return total
+	case float64:
+		return m
+	default:
+		return 0
+	}
 }
