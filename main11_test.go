@@ -5,6 +5,7 @@ import (
 )
 
 func TestValidateStraight11(t *testing.T) {
+	t.Skip()
 	testCases := []struct {
 		desc     string
 		input    string
@@ -25,6 +26,7 @@ func TestValidateStraight11(t *testing.T) {
 }
 
 func TestValidateLetters11(t *testing.T) {
+	t.Skip()
 	testCases := []struct {
 		desc     string
 		input    string
@@ -46,6 +48,7 @@ func TestValidateLetters11(t *testing.T) {
 }
 
 func TestValidatePairs11(t *testing.T) {
+	t.Skip()
 	testCases := []struct {
 		desc     string
 		input    string
@@ -66,6 +69,7 @@ func TestValidatePairs11(t *testing.T) {
 }
 
 func TestValidate11(t *testing.T) {
+	t.Skip()
 	testCases := []struct {
 		desc     string
 		input    string
@@ -88,6 +92,7 @@ func TestValidate11(t *testing.T) {
 }
 
 func TestNext11(t *testing.T) {
+	t.Skip()
 	testCases := []struct {
 		desc     string
 		input    string
@@ -108,6 +113,7 @@ func TestNext11(t *testing.T) {
 }
 
 func TestNextValid11(t *testing.T) {
+	t.Skip()
 	testCases := []struct {
 		desc     string
 		input    string
